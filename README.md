@@ -1,109 +1,62 @@
-# Ex1(b) Conversion of the infix expression into postfix expression
-## DATE: 26/2/25
+# Ex2(a) Dequeue Elements from Circular Queue
+## DATE:3/3/25
 ## AIM:
-To write a C program to convert the infix expression into postfix form using stack by following the operator precedence and associative rule.
+To write a C program to delete three elements from the filled circular queue.
 
 ## Algorithm
-1. Start the program.  
-2. Initialize an empty stack and set the top index to -1.  
-3. Define the push and pop functions for stack operations.  
-4. Define a function to assign priority to each operator.  
-5. Traverse the infix expression character by character and process operands, operators, and parentheses accordingly.  
-6. After the traversal, pop and print all remaining operators from the stack.  
-7. End the program.
+ 1. Start 
+2. Define a queue with a fixed size SIZE and initialize front and rear pointers. 
+3. Define the deQueue() function to remove and return an element from the front of the queue. 
+4. Check if the queue is empty using isEmpty(); if empty, print an error message. 
+5. If the queue has one element, reset both front and rear to -1. 
+6. If the queue has more than one element, update front to the next index using modulo 
+operation ((front + 1) % SIZE). 
+7. Return the removed element from the front of the queue. 
+8. End
 
 ## Program:
 ```
 /*
-Program to convert the infix expression into postfix expression
+Program to delete three elements from the filled circular queue
 Developed by: ROSHINI S
 RegisterNumber: 212223230174
 */
-
-#include<stdio.h> 
-#include<ctype.h>
-char stack[100]; 
-int top = -1;
-void push(char x)
-{
-stack[++top]=x;
-}
-char pop()
-{
-if(top==-1) 
-return 0;
-else
-return stack[top--];
-}
-int priority(char x)
-{
-if(x=='(')
-{
-return 0;
-}
-if(x=='&'||x=='|')
-{
-return 1;
-}
-if(x=='+'||x=='-')
-{
-return 2;
-}
-if(x=='*'||x=='/'||x=='%')
-{
-return 3;
-}
-if(x=='^')
-{
-return 4;
-}
-return 0;
-}
-char IntoPost(char *exp)
-{
-char *e,x; 
-e=exp; 
-while(*e!='\0')
-{
-if(isalnum(*e))
-{
-printf("%c ",*e);
-}
-else if(*e=='(')
-{
-push(*e);
-}
-else if(*e==')')
-{
-while((x=pop())!='(') 
-printf("%c ",x);
-}
-else
-{
-while(priority(stack[top])>=priority(*e)) 
-printf("%c ",pop());
-push(*e);
-}
-e++;
-}
-while(top != -1)
-{
-printf("%c ",pop());
-}return 0;
-}
-int main()
-{
-char exp[100]="3%2+4*(A&B)"; 
-IntoPost(exp);
-return 1;
-}
+#include <stdio.h> 
+#define SIZE 5 
+int items[SIZE]; 
+int front = -1, rear = -1; 
+*/ 
+int deQueue() 
+{ 
+int element; 
+element=items[front]; 
+if(isEmpty()) 
+{ 
+printf("Queue is Empty!!"); 
+} 
+else 
+{ 
+if(front==rear) 
+{ 
+front=-1; 
+rear=-1; 
+} 
+  
+  
+else 
+{ 
+front=(front+1)%SIZE; 
+} 
+} 
+return element; 
+} 
 ```
 
 ## Output:
-![image](https://github.com/user-attachments/assets/706066db-884c-4c25-84f8-c06b3a66e781)
 
+![image](https://github.com/user-attachments/assets/2d032f48-a9de-4b2c-bc43-1f450453a868)
 
 
 
 ## Result:
-Thus, the C program to convert the infix expression into postfix form using stack by following the operator precedence and associative rule is implemented successfully.
+Thus, the C program to delete three elements from the filled circular queue is implemented successfully.
